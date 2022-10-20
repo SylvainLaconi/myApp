@@ -1,0 +1,11 @@
+**/node_modules
+**/dist
+**/Dockerfile
+**/npm-debug.log
+**/.gitignore
+Dockerfile
+node_modules
+npm-debug.log
+.gitignore
+.git
+*.md
