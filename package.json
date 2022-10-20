@@ -7,10 +7,13 @@
     "build:api": "cd api && npm run build",
     "build:front": "cd front && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf ./**/node_modules && rm -rf ./**/dist && rm ./**/package-lock.json",
-    "install:front": "cd front && npm install",
-    "install:api": "cd api && npm install",
-    "install:all": "npm run clean && npm run install:front && npm run install:api"
+    "clean": "rm -rf ./apps/**/node_modules && rm -rf ./apps/**/dist && rm ./apps/**/package-lock.json",
+    "install:front": "cd apps/front && npm install",
+    "install:api": "cd apps/api && npm install",
+    "install:all": "npm run install:front && npm run install:api",
+    "docker:down": "docker-compose down -v",
+    "docker:clean": "docker system prune -a",
+    "docker:start": "docker-compose up -d --build -V"
   },
   "repository": {
     "type": "git",

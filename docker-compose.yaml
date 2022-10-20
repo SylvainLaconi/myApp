@@ -6,17 +6,17 @@ services:
     build:
       context: ./
       target: development
-      dockerfile: front/Dockerfile
+      dockerfile: apps/front/Dockerfile
     volumes:
       - /app/node_modules
-      - ./front:/app
+      - ./apps/front:/app
     ports:
       - "${FRONT_PORT}:${FRONT_PORT}"
     environment:
       NODE_ENV: ${NODE_ENV}
       FRONT_PORT: ${FRONT_PORT}
     env_file:
-      - ./front/.env
+      - ./apps/front/.env
     depends_on:
       - api
 
@@ -25,17 +25,17 @@ services:
     build:
       context: ./
       target: development
-      dockerfile: api/Dockerfile
+      dockerfile: apps/api/Dockerfile
     volumes:
       - /app/node_modules
-      - ./api:/app
+      - ./apps/api:/app
     ports:
       - "${API_PORT}:${API_PORT}"
     environment:
       NODE_ENV: ${NODE_ENV}
       API_PORT: ${API_PORT}
     env_file:
-      - ./api/.env
+      - ./apps/api/.env
     depends_on:
       - postgres
   

@@ -2,11 +2,11 @@ FROM node:16-alpine3.15 As development
 
 WORKDIR /app
 
-COPY ./front/package*.json /app
+COPY ./apps/front/package*.json /app
 
 RUN npm install
 
-COPY ./front /app
+COPY ./apps/front /app
 
 EXPOSE ${FRONT_PORT}
 
@@ -19,11 +19,11 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /app
 
-COPY ./front/package*.json /app
+COPY ./apps/front/package*.json /app
 
 RUN npm ci
 
-COPY ./front /app
+COPY ./apps/front /app
 
 RUN npm run build
 
