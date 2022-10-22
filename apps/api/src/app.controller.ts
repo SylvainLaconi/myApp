@@ -1,12 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('users')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getUsers(): Record<string, string | number>[] {
+    return this.appService.getUsers();
+  }
+
+  @Get(':userId')
+  getUserById(
+    @Param('userId') userId: string,
+  ): Record<string, string | number> {
+    return this.appService.getUserById(Number(userId));
   }
 }
