@@ -31,7 +31,7 @@ jobs:
           run: docker build -t myapp-api -f apps/api/Dockerfile .
 
         - name: Test Docker image
-          run: docker run myapp-api sh -c "go test -v"
+          run: docker run myapp-api sh -c "npm test -v"
 
         - name: Push Docker image
           run: docker push myapp-api
