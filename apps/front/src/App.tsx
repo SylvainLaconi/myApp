@@ -36,12 +36,12 @@ function App() {
 					<img src={reactLogo} className="logo react" alt="React logo" />
 				</a>
 			</div>
+			<h1>Mon app front</h1>
 			<ul>
 				{users?.map((user) => (
 					<li key={user.id}>{user.name}</li>
 				))}
 			</ul>
-			{/* <h1>{value}</h1> */}
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more
 			</p>
