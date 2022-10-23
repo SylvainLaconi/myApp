@@ -8,7 +8,7 @@ COPY ./apps/api/package*.json /app
 
 RUN npm install
 
-COPY ./apps/api /app
+COPY ./apps/api /app/
 
 EXPOSE ${API_PORT}
 

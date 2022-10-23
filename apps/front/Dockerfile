@@ -6,7 +6,7 @@ COPY ./apps/front/package*.json /app
 
 RUN npm install
 
-COPY ./apps/front /app
+COPY ./apps/front /app/
 
 EXPOSE ${FRONT_PORT}
 
