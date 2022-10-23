@@ -8,7 +8,7 @@ jobs:
 
     deploy-api:
 
-        name: Setup Gcloud Account
+        name: Deploy myApp-api on GCloud
         runs-on: ubuntu-latest
         env:
           IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}

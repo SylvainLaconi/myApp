@@ -8,7 +8,7 @@ jobs:
 
     deploy-front:
 
-        name: Setup Gcloud Account
+        name: Deploy myApp-front on GCloud
         runs-on: ubuntu-latest
         env:
           IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID_FRONT }}/${{ secrets.GCP_APP_NAME_FRONT }}
