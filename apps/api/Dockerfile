@@ -12,6 +12,6 @@ COPY ./apps/api /app/
 
 RUN npm run build
 
-EXPOSE ${API_PORT}
+EXPOSE $PORT
 
 CMD ["npm", "run", "start:dev"]
