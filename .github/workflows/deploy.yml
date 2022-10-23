@@ -43,4 +43,4 @@ jobs:
           run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp-api
 
         - name: Deploy Docker image
-          run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image us-central1-docker.pkg.dev/${{ secrets.DOCKER_USERNAME }}/myapp-api:latest --region us-central1 --platform managed
+          run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image us-docker.pkg.dev/${{ secrets.DOCKER_USERNAME }}/myapp-api:latest --region us-central1 --platform managed
