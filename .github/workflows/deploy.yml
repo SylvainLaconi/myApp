@@ -32,10 +32,14 @@ jobs:
 
         - name: Test Docker image
           run: docker run myapp-api sh -c "npm test -v"
+        
+        - name: Login Docker
+          run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
+        
+        - name: Tag Docker image
+          run: docker tag myapp-api ${{ secrets.DOCKER_USERNAME }}/myapp-api
 
         - name: Push Docker image
-          run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
-          run: docker tag myapp-api ${{ secrets.DOCKER_USERNAME }}/myapp-api
           run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp-api
 
         - name: Deploy Docker image
