@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN npm install -g @nestjs/cli 
 
-COPY ./apps/api/package*.json /app
+COPY ./apps/api/package*.json /app/
 
 RUN npm install
 
