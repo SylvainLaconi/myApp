@@ -33,11 +33,10 @@ jobs:
         - name: Test Docker image
           run: docker run myapp-api sh -c "npm test -v"
 
-        - name: Login Docker
-          run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
-
         - name: Push Docker image
-          run: docker push myapp-api
+          run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} docker.io
+          run: docker tag myapp-api ${{ secrets.DOCKER_USERNAME }}/myapp-api
+          run: docker push ${{ secrets.DOCKER_USERNAME }}/myapp-api
 
         - name: Deploy Docker image
           run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image myapp-api --region us-central1 --platform managed
