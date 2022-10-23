@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-    deploy:
+    deploy-api:
 
         name: Setup Gcloud Account
         runs-on: ubuntu-latest
