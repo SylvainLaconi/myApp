@@ -15,7 +15,7 @@ services:
       NODE_ENV: ${NODE_ENV}
       FRONT_PORT: ${FRONT_PORT}
     env_file:
-      - ./apps/front/.env
+      - ./apps/front/.env.development
     depends_on:
       - api
 
