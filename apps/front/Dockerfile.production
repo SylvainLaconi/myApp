@@ -1,4 +1,7 @@
-FROM node:16-alpine3.15
+FROM node:16-alpine3.15 As production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /app
 
@@ -12,4 +15,4 @@ RUN npm run build
 
 EXPOSE $PORT
 
-CMD ["npm", "run", "dev"]
+CMD ["node", "dist/index.js"]
