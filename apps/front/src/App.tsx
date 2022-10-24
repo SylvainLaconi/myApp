@@ -9,7 +9,7 @@ function App() {
 		[],
 	);
 
-	console.log('1', import.meta.env.VITE_API_URL);
+	console.log('VITE_API_URL', import.meta.env.VITE_API_URL);
 
 	useEffect(() => {
 		const fetchData = async () => {
