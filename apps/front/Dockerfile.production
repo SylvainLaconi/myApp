@@ -1,7 +1,6 @@
 FROM node:16-alpine3.15 As production
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+ENV VITE_API_URL "https://myapp-api-366321-d4jd4xerya-uc.a.run.app"
 
 WORKDIR /app
 
