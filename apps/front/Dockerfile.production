@@ -1,12 +1,13 @@
 FROM node:16-alpine3.15 AS builder
-# Add a work directory
+
 WORKDIR /app
-# Cache and Install dependencies
+
 COPY ./apps/front/package*.json /app/
+
 RUN npm ci
-# Copy app files
+
 COPY ./apps/front /app/
-# Build the app
+
 RUN npm run build
 
 CMD ["npm","run", "preview"]
