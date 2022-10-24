@@ -8,10 +8,5 @@ export default defineConfig({
 		port: Number(process.env.PORT) || 3000,
 	},
 	plugins: [react()],
-	build: {
-		define: { 
-			'process.env.NODE_ENV': '"production"' 
-		}
-	}
 });
 
