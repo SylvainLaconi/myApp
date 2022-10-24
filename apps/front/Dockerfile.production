@@ -1,7 +1,4 @@
-FROM node:16-alpine3.15 as production
-
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+FROM node:16-alpine3.15
 
 WORKDIR /app
 
@@ -15,4 +12,4 @@ RUN npm run build
 
 EXPOSE $PORT
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "preview"]
