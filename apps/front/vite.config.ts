@@ -10,10 +10,11 @@ export default defineConfig(({ mode }) => {
     },
 	server: {
 		host: '0.0.0.0',
-      port: parseInt(process.env.PORT, 10) || 3000,
+    port: parseInt(process.env.PORT, 10) || 3000,
     },
-    preview: {
-      port: parseInt(process.env.PORT, 10) || 3000,
+  preview: {
+		host: '0.0.0.0',
+    port: parseInt(process.env.PORT, 10) || 3000,
     },
 	plugins: [react()],
 }});
