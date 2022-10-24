@@ -15,6 +15,8 @@ function App() {
 	console.log('DEV', import.meta.env.DEV);
 	console.log('SSR', import.meta.env.SSR);
 
+	console.log('VITE_API_URL', import.meta.env.VITE_API_URL);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/users/`, {
