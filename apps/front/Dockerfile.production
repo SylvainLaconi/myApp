@@ -1,6 +1,4 @@
-FROM node:16-alpine3.15 As production
-
-ENV VITE_API_URL "https://myapp-api-366321-d4jd4xerya-uc.a.run.app"
+FROM node:16-alpine3.15
 
 WORKDIR /app
 
@@ -14,4 +12,4 @@ RUN npm run build
 
 EXPOSE $PORT
 
-CMD ["node", "dist/index.js"]
+CMD ["npm", "run", "dev"]
