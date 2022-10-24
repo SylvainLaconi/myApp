@@ -1,4 +1,5 @@
 FROM node:16-alpine3.15 as development
+ENV NODE_ENV development
 
 WORKDIR /app
 
