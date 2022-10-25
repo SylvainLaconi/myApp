@@ -3,10 +3,12 @@ import { defineConfig, loadEnv } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) }
+  const env = loadEnv(mode, process.cwd(), '')
+  console.log("env", env);
+  
   return{
 	define: {
-      "process.env": process.env,
+      __APP_ENV__: env.APP_ENV
     },
 	server: {
 		host: '0.0.0.0',
