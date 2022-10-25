@@ -10,7 +10,6 @@ function App() {
 	);
 
 	console.log('MODE', import.meta.env.MODE);
-	console.log('BASE_URL', import.meta.env.BASE_URL);
 	console.log('PROD', import.meta.env.PROD);
 	console.log('DEV', import.meta.env.DEV);
 
