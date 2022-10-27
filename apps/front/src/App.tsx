@@ -9,14 +9,10 @@ function App() {
 		[],
 	);
 
-	console.log('MODE', import.meta.env.MODE);
-	console.log('BASE_URL', import.meta.env.BASE_URL);
-	console.log('PROD', import.meta.env.PROD);
-	console.log('DEV', import.meta.env.DEV);
-	console.log('SSR', import.meta.env.SSR);
-
 	useEffect(() => {
 		const fetchData = async () => {
+			console.log(import.meta.env.VITE_API_URL);
+
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/users/`, {
 				method: 'GET',
 				headers: {
@@ -45,7 +41,7 @@ function App() {
 			<h1>Mon app front</h1>
 			<ul>
 				{users?.map((user) => (
-					<li key={user.id}>{user.name}</li>
+					<li key={user.id}>{user.firstName + ' ' + user.lastName}</li>
 				))}
 			</ul>
 			<p className="read-the-docs">
