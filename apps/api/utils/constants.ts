@@ -9,6 +9,7 @@ const POSTGRES_PORT = parseInt(process.env.POSTGRES_PORT || '', 10) || 5432;
 const POSTGRES_USER = process.env.POSTGRES_USER || '';
 const POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD || '';
 const POSTGRES_DATABASE = process.env.POSTGRES_DATABASE || '';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export default {
   HOST,
@@ -18,4 +19,5 @@ export default {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_DATABASE,
+  JWT_SECRET,
 };
