@@ -4,23 +4,18 @@ import {
   Delete,
   Get,
   Param,
-  Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
+import { UpdateResult } from 'typeorm';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() newUser: CreateUserDto): Promise<User> {
-    return this.usersService.create(newUser);
-  }
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -35,7 +30,16 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Delete('id')
+  @Put(':id')
+  update(
+    @Param('id') id: User['id'],
+    @Body() updatedUser: UpdateUserDto,
+  ): Promise<UpdateResult> {
+    return this.usersService.update(id, updatedUser);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
   remove(@Param('id') id: User['id']): Promise<void> {
     return this.usersService.remove(id);
   }
