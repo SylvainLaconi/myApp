@@ -14,7 +14,7 @@ import { SignUpGuard } from './signup.guard';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secret: constants.JWT_SECRET,
+      secret: 'toto',
       signOptions: { expiresIn: '1800s' },
     }),
   ],
