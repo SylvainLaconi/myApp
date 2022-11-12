@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, UpdateResult } from 'typeorm';
-import { hashPassword } from '../../utils/hash';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { hashPassword } from '../../utils/BcryptService';
 import { SignUpAuthDto } from '../auth/dto/signup-auth.dto';
 import { User } from './user.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -14,36 +14,63 @@ export class UsersService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await this.usersRepository.find();
+    try {
+      return await this.usersRepository.find();
+    } catch (error) {
+      throw new Error('UsersService - findAll()');
+    }
   }
 
   async findOne(id: User['id']): Promise<User> {
-    return await this.usersRepository.findOneBy({ id });
+    try {
+      return await this.usersRepository.findOneBy({ id });
+    } catch (error) {
+      throw new Error('UsersService - findOne()');
+    }
   }
 
   async findOneByUsername(
     username: User['username'],
   ): Promise<User | undefined> {
-    return this.usersRepository.findOneBy({ username });
+    try {
+      return await this.usersRepository.findOneBy({ username });
+    } catch (error) {
+      throw new Error('UsersService - findOneByUsername()');
+    }
   }
 
-  async remove(id: number): Promise<void> {
-    await this.usersRepository.delete(id);
+  async remove(id: number): Promise<DeleteResult> {
+    try {
+      return await this.usersRepository.delete(id);
+    } catch (error) {
+      throw new Error('UsersService - remove()');
+    }
   }
 
   async signUp(newUser: SignUpAuthDto): Promise<User> {
-    const user = newUser;
+    try {
+      const user = new User();
 
-    user.username = newUser.username;
-    user.password = await hashPassword(newUser.password);
+      user.username = newUser.username;
+      user.firstName = newUser.firstName;
+      user.lastName = newUser.lastName;
+      user.email = newUser.email;
+      user.password = await hashPassword(newUser.password);
 
-    return this.usersRepository.save(user);
+      return await this.usersRepository.save(user);
+    } catch (error) {
+      throw new Error('UsersService - signUp()');
+    }
   }
 
   async update(
     userId: User['id'],
     updatedUser: UpdateUserDto,
   ): Promise<UpdateResult> {
-    return this.usersRepository.update(userId, updatedUser);
+    try {
+      return await this.usersRepository.update(userId, updatedUser);
+    } catch (error) {
+      throw new Error('UsersService - update()');
+    }
   }
 }

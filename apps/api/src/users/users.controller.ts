@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -7,7 +8,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { UpdateResult } from 'typeorm';
+import { ResponseError, ResponseSuccess } from 'utils/ApiResponses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
@@ -19,28 +20,52 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+  async findAll() {
+    try {
+      const result = await this.usersService.findAll();
+
+      return ResponseSuccess(result);
+    } catch (error) {
+      throw new BadRequestException(ResponseError(error));
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  getUserById(@Param('id') id: User['id']): Promise<User> {
-    return this.usersService.findOne(id);
+  async getUserById(@Param('id') id: User['id']) {
+    try {
+      const result = await this.usersService.findOne(id);
+
+      return ResponseSuccess(result);
+    } catch (error) {
+      throw new BadRequestException(ResponseError(error));
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: User['id'],
     @Body() updatedUser: UpdateUserDto,
-  ): Promise<UpdateResult> {
-    return this.usersService.update(id, updatedUser);
+  ) {
+    try {
+      const result = await this.usersService.update(id, updatedUser);
+
+      return ResponseSuccess(result);
+    } catch (error) {
+      throw new BadRequestException(ResponseError(error));
+    }
   }
 
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: User['id']): Promise<void> {
-    return this.usersService.remove(id);
+  async remove(@Param('id') id: User['id']) {
+    try {
+      const result = await this.usersService.remove(id);
+
+      return ResponseSuccess(result);
+    } catch (error) {
+      throw new BadRequestException(ResponseError(error));
+    }
   }
 }

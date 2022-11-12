@@ -1,6 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { comparePassword } from 'utils/hash';
+import { comparePassword } from 'utils/BcryptService';
 import { User } from '../users/user.entity';
 import { UsersService } from '../users/users.service';
 
@@ -15,23 +19,35 @@ export class AuthService {
     username: User['username'],
     pass: User['password'],
   ): Promise<any> {
-    const user = await this.usersService.findOneByUsername(username);
+    try {
+      const user = await this.usersService.findOneByUsername(username);
 
-    const isMatch = await comparePassword(pass, user.password);
+      if (!user) {
+        throw new NotFoundException('User not found');
+      }
 
-    if (isMatch) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...result } = user;
+      const isMatch = await comparePassword(pass, user.password);
 
-      return result;
+      if (isMatch) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password, ...result } = user;
+
+        return result;
+      }
+      return null;
+    } catch (error) {
+      throw new BadRequestException('AuthService - validateUser()');
     }
-    return null;
   }
 
   async login(user: any) {
-    const payload = { username: user.username, sub: user.userId };
-    return {
-      access_token: this.jwtService.sign(payload),
-    };
+    try {
+      const payload = { username: user.username, sub: user.userId };
+      return {
+        access_token: this.jwtService.sign(payload),
+      };
+    } catch (error) {
+      throw new Error('AuthService - login()');
+    }
   }
 }
