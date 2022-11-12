@@ -10,7 +10,7 @@ import constants from '../utils/constants';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.env.${constants.NODE_ENV}`,
+      envFilePath: `../.env.${constants.NODE_ENV}`,
       isGlobal: true,
     }),
     TypeOrmModule.forRoot(ormconfig),
