@@ -1,23 +1,15 @@
 FROM node:16-alpine3.15 AS builder
-# Add a work directory
+
+ENV VITE_API_URL=https://myapp-api-366321-d4jd4xerya-uc.a.run.app
+
 WORKDIR /app
-# Cache and Install dependencies
+
 COPY ./apps/front/package*.json /app/
+
 RUN npm ci
-# Copy app files
+
 COPY ./apps/front /app/
-# Build the app
+
 RUN npm run build
 
-# Bundle static assets with nginx
-FROM node:16-alpine3.15 as production
-
-ENV PORT 8080
-ENV HOST 0.0.0.0
-# Copy built assets from builder
-COPY --from=builder /app/dist .
-
-RUN npm install pm2 -g
-
-# Start nginx
-CMD ["pm2-runtime","index.js"]
+CMD ["npm","run", "preview"]
