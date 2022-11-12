@@ -14,7 +14,7 @@ import { SignUpGuard } from './signup.guard';
     UsersModule,
     PassportModule,
     JwtModule.register({
-      secretOrKey: constants.JWT_SECRET,
+      secret: constants.JWT_SECRET,
       signOptions: { expiresIn: '1800s' },
     }),
   ],
