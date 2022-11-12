@@ -11,7 +11,7 @@ https://myapp-front-fimj2g7cjq-uc.a.run.app/
 ### FRONT
 - Build: Vite
 - Language: TypeScript
-- Librairy: React
+- Library: React
 - Navigation: react-router V6.4
 - Data-fetching library: react-query V3
 - UI Kit: Chakra-ui V2
