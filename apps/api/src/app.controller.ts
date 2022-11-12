@@ -1,19 +1,12 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get } from '@nestjs/common';
+import { AuthService } from './auth/auth.service';
 
-@Controller('users')
+@Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private authService: AuthService) {}
 
   @Get()
-  getUsers(): Record<string, string | number>[] {
-    return this.appService.getUsers();
-  }
-
-  @Get(':userId')
-  getUserById(
-    @Param('userId') userId: string,
-  ): Record<string, string | number> {
-    return this.appService.getUserById(Number(userId));
+  get(): string {
+    return 'API is running ❤';
   }
 }
