@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
+const ENV = process.env.ENV;
 const HOST = process.env.API_HOST || '0.0.0.0';
 const PORT = parseInt(process.env.API_PORT || '', 10) || 3000;
 const POSTGRES_HOST = process.env.POSTGRES_HOST || '';
@@ -14,6 +15,7 @@ const TYPEORM_SEEDING_FACTORIES = process.env.TYPEORM_SEEDING_FACTORIES;
 const TYPEORM_SEEDING_SEEDS = process.env.TYPEORM_SEEDING_SEEDS;
 
 export default {
+  ENV,
   HOST,
   PORT,
   POSTGRES_HOST,

@@ -1,11 +1,18 @@
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { Heading, HStack, IconButton, VStack } from '@chakra-ui/react';
-import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../contexts/Auth';
 
 const Root = () => {
 	const { LogOut } = useAuth();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		navigate('/home');
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<VStack bgColor="gray.100" w={'100vw'} h={'100vh'} m={0}>

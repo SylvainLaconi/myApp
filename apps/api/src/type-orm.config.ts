@@ -7,6 +7,9 @@ import constants from '../utils/constants';
 const ormconfig: TypeOrmModuleOptions & DataSourceOptions & SeederOptions = {
   type: 'postgres',
   host: constants.POSTGRES_HOST,
+  extra: {
+    socketPath: constants.POSTGRES_HOST,
+  },
   port: constants.POSTGRES_PORT,
   username: constants.POSTGRES_USER,
   password: constants.POSTGRES_PASSWORD,
