@@ -3,15 +3,18 @@ https://myapp-front-fimj2g7cjq-uc.a.run.app/
 
 ## Stack
 ### API
-- Environnement: Node.js
-- Langage: TypeScript
+- Environment: Node.js
+- Language: TypeScript
 - Frameworks : Nest.js & Express.js
-- Authentification : Passport.js & JWT & Bcrypt
+- Authentication : Passport.js & JWT & Bcrypt
 
 ### FRONT
 - Build: Vite
-- Langage: TypeScript
-- Librairie: React
+- Language: TypeScript
+- Librairy: React
+- Navigation: react-router V6.4
+- Data-fetching library: react-query V3
+- UI Kit: Chakra-ui V2
 
 ## Lancer le projet en DEV
 ```
