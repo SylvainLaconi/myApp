@@ -10,6 +10,6 @@ RUN npm install
 
 COPY ./apps/api /app/
 
-EXPOSE ${API_PORT}
+EXPOSE ${PORT}
 
 CMD ["npm", "run", "start:dev"]
