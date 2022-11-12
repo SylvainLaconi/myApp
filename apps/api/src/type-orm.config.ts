@@ -21,7 +21,6 @@ const ormconfig: TypeOrmModuleOptions & DataSourceOptions & SeederOptions = {
   factories: [constants.TYPEORM_SEEDING_FACTORIES],
   migrations: [' dist/migrations/*{.ts,.js}'],
   migrationsTableName: 'migrations_typeorm',
-  envFilePath: [`env.${constants.NODE_ENV}`],
 };
 
 export const dataSource = new DataSource(ormconfig);
