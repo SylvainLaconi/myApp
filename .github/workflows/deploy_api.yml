@@ -41,7 +41,7 @@ jobs:
           run: docker buildx build --platform linux/amd64 -t $IMAGE_NAME -f apps/api/Dockerfile.production .
 
         - name: Test Docker image
-          run: docker run -p $IMAGE_NAME sh -c "npm test -v"
+          run: docker run $IMAGE_NAME sh -c "npm test -v"
 
         - name: Push Docker image
           run: docker push $IMAGE_NAME
