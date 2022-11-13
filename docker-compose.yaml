@@ -31,9 +31,9 @@ services:
       - "${PORT}:${PORT}"
     environment:
       NODE_ENV: ${NODE_ENV}
-      API_PORT: ${PORT}
+      PORT: ${PORT}
     env_file:
-      - ./apps/api/.env.development
+      - ./apps/api/config/env/development.env
     depends_on:
       - postgres
 
