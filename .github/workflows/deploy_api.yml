@@ -23,7 +23,7 @@ jobs:
         steps:
 
         - name: Check env variables
-          run:
+          run: |
             echo Display the image name: $IMAGE_NAME
             echo Display the jwt: $JWT_SECRET
             echo Display the environmnet: $NODE_ENV
