@@ -12,6 +12,16 @@ jobs:
         runs-on: ubuntu-latest
         env:
           IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}
+          NODE_ENV: production
+          PORT: 8080
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: myapp
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DATABASE: my-app-db
+          POSTGRES_INSTANCE_PASSWORD: ${{ secrets.POSTGRES_INSTANCE_PASSWORD}}
+
         steps:
 
         - name: Login
@@ -31,10 +41,10 @@ jobs:
           run: docker buildx build --platform linux/amd64 -t $IMAGE_NAME -f apps/api/Dockerfile.production .
 
         - name: Test Docker image
-          run: docker run -p 8080:8080 $IMAGE_NAME sh -c "npm test -v"
+          run: docker run -p $IMAGE_NAME sh -c "npm test -v"
 
         - name: Push Docker image
           run: docker push $IMAGE_NAME
 
         - name: Deploy Docker image
-          run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed --port 8080
+          run: gcloud run deploy ${{ secrets.GCP_PROJECT_ID }} --image $IMAGE_NAME --region us-central1 --platform managed
