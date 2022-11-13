@@ -28,8 +28,7 @@ jobs:
             project_id: ${{ secrets.GCP_PROJECT_ID }}
             service_account_email: ${{ secrets.GCP_EMAIL }}
             service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          run:
-            echo $JWT_SECRET
+          
 
         - name: Configure Docker
           run: gcloud auth configure-docker --quiet
@@ -38,6 +37,8 @@ jobs:
           uses: actions/checkout@v2
 
         - name: Build Docker image
+          run:
+            echo $JWT_SECRET
           run: docker buildx build --platform linux/amd64 -t $IMAGE_NAME -f apps/api/Dockerfile.production .
 
         - name: Test Docker image
