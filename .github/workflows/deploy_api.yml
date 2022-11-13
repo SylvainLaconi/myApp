@@ -13,10 +13,8 @@ jobs:
         env:
           IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GCP_APP_NAME }}
           NODE_ENV: production
-          PORT: 8080
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
-          POSTGRES_PORT: 5432
           POSTGRES_USER: myapp
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DATABASE: my-app-db
@@ -30,6 +28,8 @@ jobs:
             project_id: ${{ secrets.GCP_PROJECT_ID }}
             service_account_email: ${{ secrets.GCP_EMAIL }}
             service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          script:
+            echo $JWT_SECRET
 
         - name: Configure Docker
           run: gcloud auth configure-docker --quiet
