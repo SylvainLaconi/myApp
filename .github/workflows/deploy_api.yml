@@ -28,7 +28,7 @@ jobs:
             project_id: ${{ secrets.GCP_PROJECT_ID }}
             service_account_email: ${{ secrets.GCP_EMAIL }}
             service_account_key: ${{ secrets.GCP_CREDENTIALS }}
-          script:
+          run:
             echo $JWT_SECRET
 
         - name: Configure Docker
