@@ -4,12 +4,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { configuration } from 'config/configuration';
+import { configuration } from 'configuration';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `${__dirname}/config/env/${process.env.NODE_ENV}.env`,
+      envFilePath: '.env',
       isGlobal: true,
       load: [configuration],
     }),
