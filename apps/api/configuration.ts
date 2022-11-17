@@ -16,6 +16,9 @@ export const configuration = () => ({
     factories: [process.env.TYPEORM_SEEDING_FACTORIES],
     migrations: [' dist/migrations/*{.ts,.js}'],
     migrationsTableName: 'migrations_typeorm',
-    ssl: process.env.NODE_ENV === 'development' ? false : true,
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
   },
 });
