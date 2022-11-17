@@ -8,11 +8,7 @@ export const configuration = () => ({
   },
   db: {
     type: 'postgres',
-    host: process.env.POSTGRES_HOST || '',
-    port: parseInt(process.env.POSTGRES_PORT || '', 10) || 5432,
-    username: process.env.POSTGRES_USER || '',
-    password: process.env.POSTGRES_PASSWORD || '',
-    database: process.env.POSTGRES_DATABASE || '',
+    url: process.env.POSTGRES_URL || '',
     entities: [`${process.cwd()}/dist/src/**/*.entity{ .ts,.js}`],
     synchronize: process.env.NODE_ENV === 'development' ? true : true, //Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
     autoLoadEntities: true,
