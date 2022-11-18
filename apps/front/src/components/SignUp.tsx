@@ -4,12 +4,14 @@ import {
 	FormErrorMessage,
 	FormLabel,
 	Input,
+	Link,
 	VStack,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { Link as Reactlink } from 'react-router-dom';
 import { z } from 'zod';
 
 import { SignUserUp } from '../services/auth.api';
@@ -182,6 +184,12 @@ const SignUp = () => {
 						>
 							Sign up
 						</Button>
+						<FormLabel fontSize={'2xs'}>
+							{'Already have an account ? '}
+							<Link as={Reactlink} to={'/auth/login'} color="blue.500">
+								{'Login'}
+							</Link>
+						</FormLabel>
 					</VStack>
 				</form>
 			</VStack>

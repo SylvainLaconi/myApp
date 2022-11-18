@@ -38,10 +38,13 @@ export const AuthProvider = ({ children }: React.ComponentProps<'div'>) => {
 	);
 
 	useEffect(() => {
+		setToken(JSON.parse(localStorage.getItem('token') as string));
+	}, []);
+
+	useEffect(() => {
 		if (token) {
 			localStorage.setItem('token', JSON.stringify(token));
-		} else {
-			localStorage.removeItem('token');
+			setIsAuthenticated(true);
 		}
 	}, [token]);
 
@@ -58,6 +61,7 @@ export const AuthProvider = ({ children }: React.ComponentProps<'div'>) => {
 	}, [profile.data?.result]);
 
 	const LogOut = useCallback(() => {
+		localStorage.removeItem('token');
 		setToken(null);
 		setAuthError(null);
 		setIsAuthenticated(false);
