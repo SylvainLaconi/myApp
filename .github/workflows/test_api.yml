@@ -1,0 +1,14 @@
+name: Run test api
+
+on: [push, pull_requet]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Run unit and E2E tests
+      run: |
+        npm run test
+        echo Test completed
