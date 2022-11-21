@@ -1,6 +1,6 @@
 name: Run test api
 
-on: [push, pull_requet]
+on: [push, pull_request]
 
 jobs:
   test:
