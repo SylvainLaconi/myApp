@@ -1,9 +1,13 @@
 name: Run test api
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  test:
+  API-test:
     runs-on: ubuntu-latest
 
     steps:
