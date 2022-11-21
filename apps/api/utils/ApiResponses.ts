@@ -1,6 +1,6 @@
 type Result = Record<string, any> | Record<string, any>[];
 
-type Response = {
+export type Response = {
   success: boolean;
   result?: Result;
   name?: Error['name'];

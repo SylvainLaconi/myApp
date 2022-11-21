@@ -8,13 +8,14 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
-import { ResponseError, ResponseSuccess } from 'utils/ApiResponses';
+import { UsersService } from '../users/users.service';
+import { ResponseError, ResponseSuccess } from '../../utils/ApiResponses';
 import { AuthService } from './auth.service';
 import { SignUpAuthDto } from './dto/signup-auth.dto';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { LocalAuthGuard } from './local-auth.guard';
 import { SignUpGuard } from './signup.guard';
+import { LogInAuthDto } from './dto/login-auth.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -53,7 +54,7 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req) {
+  async login(@Request() req: LogInAuthDto) {
     try {
       const result = await this.authService.login(req.user);
 

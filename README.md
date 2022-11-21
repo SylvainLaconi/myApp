@@ -7,6 +7,7 @@ https://myapp-front-fimj2g7cjq-uc.a.run.app/
 - Language: TypeScript
 - Frameworks : Nest.js & Express.js
 - Authentication : Passport.js & JWT & Bcrypt
+- Framework test : Jest
 
 ### FRONT
 - Build: Vite

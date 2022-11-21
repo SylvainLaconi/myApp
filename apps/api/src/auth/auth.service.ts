@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { comparePassword } from 'utils/BcryptService';
+import { comparePassword } from '../../utils/BcryptService';
 import { User } from '../users/user.entity';
 import { UsersService } from '../users/users.service';
 
@@ -36,13 +36,16 @@ export class AuthService {
       }
       return null;
     } catch (error) {
-      throw new BadRequestException('AuthService - validateUser()');
+      throw new BadRequestException(
+        error.message || 'AuthService - validateUser()',
+      );
     }
   }
 
   async login(user: any) {
     try {
       const payload = { username: user.username, sub: user.userId };
+
       return {
         access_token: this.jwtService.sign(payload),
       };

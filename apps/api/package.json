@@ -8,10 +8,10 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "cp ./.env.production ./.env && nest build",
-    "build:prod": "nest build",
+    "build:prod": "jest && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:dev": "NODE_ENV=development && nest start --watch",
+    "start:dev": "NODE_ENV=development && nest start --watch && jest --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "NODE_ENV=production && node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
@@ -20,6 +20,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e:watch": "jest --config ./test/jest-e2e.json --watch",
     "db:create": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js db:create --root src --config type-orm.config.ts --initialDatabase",
     "db:drop": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js db:drop --config type-orm.config.ts",
     "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed --root src --config type-orm.config.ts"
@@ -77,7 +78,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

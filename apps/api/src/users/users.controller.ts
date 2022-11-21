@@ -8,7 +8,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
-import { ResponseError, ResponseSuccess } from 'utils/ApiResponses';
+import { ResponseError, ResponseSuccess } from '../../utils/ApiResponses';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './user.entity';
