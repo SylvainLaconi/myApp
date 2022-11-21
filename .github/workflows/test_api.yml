@@ -10,5 +10,5 @@ jobs:
 
     - name: Run unit and E2E tests
       run: |
-        npm test
+        npm run test:api
         echo Test completed
