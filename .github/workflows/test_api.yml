@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: development
+      PORT: 8000
+      API_PORT: 8080
+      API_HOST: '0.0.0.0'
+      API_URL: http://localhost:8000
+      POSTGRES_PORT: 5432
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
+      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
 
     steps:
 
@@ -21,7 +29,7 @@ jobs:
       run: npm run install:api
 
     - name: Build Docker image
-      run: docker-compose up -d --build -V
+      run: docker-compose up api --build -V
 
     - name: Run unit tests
       run: npm run test:unit:api
