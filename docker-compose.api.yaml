@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  api:
+    container_name: myapp-api
+    build:
+      context: ./
+      dockerfile: apps/api/Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./apps/api:/app
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: myapp-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: myapp
+      POSTGRES_DB: my-app-db
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: myapp-pgadmin
+    ports:
+      - "6080:80"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: myapp
+      POSTGRES_DB: my-app-db
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
