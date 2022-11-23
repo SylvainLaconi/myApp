@@ -16,7 +16,7 @@ describe('AuthController', () => {
         isAdmin: false,
       };
     }),
-    findOne: jest.fn(() => {
+    findOneByUsername: jest.fn(() => {
       return {
         id: 123,
         username: 'johndoe',
@@ -113,7 +113,7 @@ describe('AuthController', () => {
   it('should get the user profile', async () => {
     const userReq = {
       user: {
-        id: Math.floor(Math.random() * 100),
+        username: 'johndoe',
       },
     };
     await expect(controller.getProfile(userReq)).resolves.toEqual({
@@ -128,6 +128,8 @@ describe('AuthController', () => {
         isAdmin: true,
       },
     });
-    expect(mockUsersService.findOne).toHaveBeenCalledWith(userReq.user.id);
+    expect(mockUsersService.findOneByUsername).toHaveBeenCalledWith(
+      userReq.user.username,
+    );
   });
 });

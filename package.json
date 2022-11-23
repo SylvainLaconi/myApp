@@ -14,7 +14,9 @@
     "docker:down": "docker-compose down -v",
     "docker:clean": "docker system prune -a",
     "docker:start": "docker-compose up -d --build -V",
-    "test:api": "cd apps/api && npm test"
+    "test:api": "cd apps/api && npm test && npm run test:e2e",
+    "test:unit:api": "cd apps/api && npm test",
+    "test:e2e:api": "cd apps/api && npm run test:e2e"
   },
   "repository": {
     "type": "git",

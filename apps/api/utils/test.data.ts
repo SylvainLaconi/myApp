@@ -1,6 +1,6 @@
 import { User } from '../src/users/user.entity';
 
-export const users: User[] = [
+export const mockUsers: User[] = [
   {
     id: 1,
     username: 'johndoe',

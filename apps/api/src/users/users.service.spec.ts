@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from './user.entity';
-import { users } from '../../utils/test.data';
+import { mockUsers } from '../../utils/test.data';
 import { UsersService } from './users.service';
 
 describe('UsersService', () => {
@@ -16,13 +16,15 @@ describe('UsersService', () => {
       }),
     ),
     find: jest.fn(() => {
-      return users;
+      return mockUsers;
     }),
     findOneBy: jest
       .fn()
       .mockImplementation(({ id, username }) =>
         Promise.resolve(
-          users.find((user) => user.id === id || user.username === username),
+          mockUsers.find(
+            (user) => user.id === id || user.username === username,
+          ),
         ),
       ),
     delete: jest.fn(() => {
@@ -32,7 +34,7 @@ describe('UsersService', () => {
       };
     }),
     update: jest.fn((id, dto) => {
-      const userToUpdate = users.find((user) => user.id === id);
+      const userToUpdate = mockUsers.find((user) => user.id === id);
       return Object.assign(userToUpdate, dto);
     }),
   };
@@ -77,20 +79,20 @@ describe('UsersService', () => {
   });
 
   it('should return all users', async () => {
-    await expect(service.findAll()).resolves.toEqual(users);
+    await expect(service.findAll()).resolves.toEqual(mockUsers);
     expect(mockUsersRepository.find).toHaveBeenCalled();
   });
 
   it('should return one user by id', async () => {
     await expect(service.findOne(1)).resolves.toEqual(
-      users.find((user) => user.id === 1),
+      mockUsers.find((user) => user.id === 1),
     );
     expect(mockUsersRepository.findOneBy).toHaveBeenCalledWith({ id: 1 });
   });
 
   it('should return one user by username', async () => {
     await expect(service.findOneByUsername('johndoe')).resolves.toEqual(
-      users.find((user) => user.username === 'johndoe'),
+      mockUsers.find((user) => user.username === 'johndoe'),
     );
     expect(mockUsersRepository.findOneBy).toHaveBeenCalledWith({
       username: 'johndoe',
@@ -98,10 +100,9 @@ describe('UsersService', () => {
   });
 
   it('should delete the user by id and return response', async () => {
-    await expect(service.remove(1)).resolves.toEqual({
-      raw: [],
-      affected: 1,
-    });
+    await expect(service.remove(1)).resolves.toEqual(
+      mockUsers.find((user) => user.id === 1),
+    );
     expect(mockUsersRepository.delete).toHaveBeenCalledWith(1);
   });
 

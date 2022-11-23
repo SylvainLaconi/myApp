@@ -18,8 +18,14 @@ jobs:
     - name: Run npm install
       run: npm run install:api
 
-    - name: Run unit and E2E tests
-      run: npm run test:api
+    - name: Build Docker image
+      run: docker-compose up -d --build -V
+
+    - name: Run unit tests
+      run: npm run test:unit:api
+
+    - name: Run E2E tests
+      run: npm run test:e2e:api
 
     - name: End
       run:  echo Test completed

@@ -1,6 +1,6 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import { users } from '../../utils/test.data';
+import { mockUsers } from '../../utils/test.data';
 import { UsersService } from '../users/users.service';
 import { AuthService } from './auth.service';
 
@@ -8,7 +8,7 @@ describe('AuthService', () => {
   let service: AuthService;
   const mockUsersService = {
     findOneByUsername: jest.fn((username) => {
-      return users.find((user) => user.username === username);
+      return mockUsers.find((user) => user.username === username);
     }),
   };
   const mockJwtService = {

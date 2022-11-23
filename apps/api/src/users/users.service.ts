@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { Repository } from 'typeorm';
 import { hashPassword } from '../../utils/BcryptService';
 import { SignUpAuthDto } from '../auth/dto/signup-auth.dto';
 import { User } from './user.entity';
@@ -39,9 +39,13 @@ export class UsersService {
     }
   }
 
-  async remove(id: number): Promise<DeleteResult> {
+  async remove(id: number): Promise<User> {
     try {
-      return await this.usersRepository.delete(id);
+      const result = await this.usersRepository.findOneBy({ id });
+
+      await this.usersRepository.delete(id);
+
+      return result;
     } catch (error) {
       throw new Error('UsersService - remove()');
     }
@@ -63,12 +67,11 @@ export class UsersService {
     }
   }
 
-  async update(
-    userId: User['id'],
-    updatedUser: UpdateUserDto,
-  ): Promise<UpdateResult> {
+  async update(userId: User['id'], updatedUser: UpdateUserDto): Promise<User> {
     try {
-      return await this.usersRepository.update(userId, updatedUser);
+      await this.usersRepository.update(userId, updatedUser);
+
+      return await this.usersRepository.findOneBy({ id: userId });
     } catch (error) {
       throw new Error('UsersService - update()');
     }
