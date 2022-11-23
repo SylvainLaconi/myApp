@@ -30,7 +30,7 @@ jobs:
       run: npm run install:api
 
     - name: Build Docker image
-      run: docker-compose -f docker-compose.api.yaml up  --build
+      run: docker-compose -f docker-compose.test-api.yaml up  --build
 
     - name: Run unit tests
       run: npm run test:unit:api

@@ -5,7 +5,7 @@ services:
     container_name: myapp-api
     build:
       context: ./
-      dockerfile: apps/api/Dockerfile
+      dockerfile: apps/api/Dockerfile.test
     volumes:
       - /app/node_modules
       - ./apps/api:/app
