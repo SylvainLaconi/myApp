@@ -12,6 +12,7 @@ jobs:
     env:
       NODE_ENV: development
       PORT: 8000
+      FRONT_PORT: 3000
       API_PORT: 8080
       API_HOST: '0.0.0.0'
       API_URL: http://localhost:8000
