@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { users } from '../../utils/test.data';
+import { mockUsers } from '../../utils/test.data';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 
@@ -7,13 +7,13 @@ describe('UsersController', () => {
   let controller: UsersController;
   const mockUsersService = {
     findAll: jest.fn(() => {
-      return users;
+      return mockUsers;
     }),
     findOne: jest.fn((id) => {
-      return users.find((user) => user.id === id);
+      return mockUsers.find((user) => user.id === id);
     }),
     update: jest.fn().mockImplementation((id, dto) => {
-      const userToUpdate = users.find((user) => user.id === id);
+      const userToUpdate = mockUsers.find((user) => user.id === id);
       return Object.assign(userToUpdate, dto);
     }),
     remove: jest.fn(() => {
@@ -43,7 +43,7 @@ describe('UsersController', () => {
   it('should get all users', async () => {
     await expect(controller.findAll()).resolves.toEqual({
       success: true,
-      result: users,
+      result: mockUsers,
     });
     expect(mockUsersService.findAll).toHaveBeenCalled();
   });
@@ -51,7 +51,7 @@ describe('UsersController', () => {
   it('should get one user by id', async () => {
     await expect(controller.getUserById(1)).resolves.toEqual({
       success: true,
-      result: users[0],
+      result: mockUsers[0],
     });
     expect(mockUsersService.findOne).toHaveBeenCalledWith(1);
   });

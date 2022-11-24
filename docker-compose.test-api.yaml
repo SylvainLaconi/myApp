@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  api:
+    container_name: myapp-api
+    build:
+      context: ./
+      dockerfile: apps/api/Dockerfile.test
+    volumes:
+      - /app/node_modules
+      - ./apps/api:/app
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${API_PORT}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: myapp-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: myapp
+      POSTGRES_DB: my-app-db

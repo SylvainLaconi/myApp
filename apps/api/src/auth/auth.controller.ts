@@ -68,7 +68,7 @@ export class AuthController {
   @Get('profile')
   async getProfile(@Request() req) {
     try {
-      const data = await this.usersService.findOne(req.user.id);
+      const data = await this.usersService.findOneByUsername(req.user.username);
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = data;
