@@ -10,7 +10,7 @@ jobs:
   API-test:
     runs-on: ubuntu-latest
     env:
-      NODE_ENV: development
+      NODE_ENV: test
       API_PORT: 8000
       FRONT_PORT: 3000
       PORT: 8080
