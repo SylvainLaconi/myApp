@@ -39,9 +39,6 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
-    
-    - name: Check running containers
-      run: docker-compose ps
 
     - name: Run unit tests
       run: docker-compose exec api npm test --skip-auth
