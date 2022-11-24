@@ -15,7 +15,7 @@ jobs:
       FRONT_PORT: 3000
       PORT: 8080
       API_HOST: '0.0.0.0'
-      API_URL: http://localhost:8000
+      API_URL: http://0.0.0.0:8000
       POSTGRES_PORT: 5432
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
@@ -28,13 +28,13 @@ jobs:
 
     - name: Check env variables
       run: |
-        echo Display the image name: $NODE_ENV
-        echo Display the jwt: $API_PORT
-        echo Display the environment: $PORT
-        echo Display the environment: $API_HOST
-        echo Display the environment: $API_URL
-        echo Display the environment: $POSTGRES_PORT
-        echo Display the environment: $POSTGRES_PASSWORD
+        echo Display the NODE_ENV: $NODE_ENV
+        echo Display the API_PORT: $API_PORT
+        echo Display the PORT: $PORT
+        echo Display the API_HOST: $API_HOST
+        echo Display the API_URL: $API_URL
+        echo Display the POSTGRES_PORT: $POSTGRES_PORT
+        echo Display the POSTGRES_PASSWORD: $POSTGRES_PASSWORD
 
     - name: Checkout repository
       uses: actions/checkout@v2
