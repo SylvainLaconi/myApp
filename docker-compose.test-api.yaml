@@ -10,10 +10,10 @@ services:
       - /app/node_modules
       - ./apps/api:/app
     ports:
-      - "${PORT}:${PORT}"
+      - "${API_PORT}:${API_PORT}"
     environment:
       NODE_ENV: ${NODE_ENV}
-      PORT: ${PORT}
+      PORT: ${API_PORT}
     depends_on:
       - postgres
 
@@ -26,15 +26,3 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: myapp
       POSTGRES_DB: my-app-db
-  
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: myapp-pgadmin
-    ports:
-      - "6080:80"
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: myapp
-      POSTGRES_DB: my-app-db
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin

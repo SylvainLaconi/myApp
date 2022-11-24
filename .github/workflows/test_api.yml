@@ -11,32 +11,35 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: development
-      PORT: 8000
+      API_PORT: 8000
       FRONT_PORT: 3000
-      API_PORT: 8080
+      PORT: 8080
       API_HOST: '0.0.0.0'
       API_URL: http://localhost:8000
       POSTGRES_PORT: 5432
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
       POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: myapp
+      POSTGRES_DB: my-app-db
 
     steps:
 
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Run npm install
-      run: npm run install:api
+    # - name: Run npm install
+    #   run: npm run install:api
 
-    - name: Build Docker image
-      run: docker-compose -f docker-compose.test-api.yaml up  --build
+    # - name: Build Docker image
+    #   run: docker-compose -f docker-compose.test-api.yaml build
 
-    - name: Run unit tests
-      run: npm run test:unit:api
+    # - name: Run unit tests
+    #   run: docker-compose run api npm test
 
-    - name: Run E2E tests
-      run: npm run test:e2e:api
+    # - name: Run E2E tests
+    #   run: docker-compose run api npm run test:e2e
 
     - name: End
       run:  echo Test completed

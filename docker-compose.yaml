@@ -28,10 +28,10 @@ services:
       - /app/node_modules
       - ./apps/api:/app
     ports:
-      - "${PORT}:${PORT}"
+      - "${API_PORT}:${API_PORT}"
     environment:
       NODE_ENV: ${NODE_ENV}
-      PORT: ${PORT}
+      PORT: ${API_PORT}
     env_file:
       - ./apps/api/.env.development
     depends_on:

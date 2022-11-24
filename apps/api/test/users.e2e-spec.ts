@@ -1,6 +1,5 @@
 import * as request from 'supertest';
 import * as dotenv from 'dotenv';
-import 'jest-extended';
 
 dotenv.config();
 
