@@ -41,10 +41,10 @@ jobs:
         time: '10s'
 
     - name: Run unit tests
-      run: docker-compose exec api npm test --skip-auth
+      run: npm test
 
     - name: Run E2E tests
-      run: docker-compose exec api npm run test:e2e --skip-auth
+      run: npm run test:e2e
 
     - name: Stop Docker image
       run: docker-compose down --remove-orphans
