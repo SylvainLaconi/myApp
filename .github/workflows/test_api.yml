@@ -44,7 +44,7 @@ jobs:
       run: npm run test:unit:api
 
     - name: Run E2E tests
-      run: npm run test:e2e:api
+      run: docker-compose exec api npm run test:e2e
 
     - name: Stop Docker image
       run: docker-compose down --remove-orphans
