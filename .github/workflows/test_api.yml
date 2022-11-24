@@ -33,13 +33,21 @@ jobs:
       run: npm run install:api
 
     - name: Build and run Docker image
-      run: docker-compose -f docker-compose.test-api.yaml up  -d --build
+      run: docker-compose -f docker-compose.test-api.yaml up -d --build
+
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+    
+    - name: Check running containers
+      run: docker-compose ps
 
     - name: Run unit tests
-      run: docker-compose exec api npm test
+      run: docker-compose exec api npm test --skip-auth
 
     - name: Run E2E tests
-      run: docker-compose exec api npm run test:e2e
+      run: docker-compose exec api npm run test:e2e --skip-auth
 
     - name: Stop Docker image
       run: docker-compose down --remove-orphans
