@@ -41,10 +41,10 @@ jobs:
         time: '10s'
 
     - name: Run unit tests
-      run: npm test
+      run: npm run test:unit:api
 
     - name: Run E2E tests
-      run: npm run test:e2e
+      run: npm run test:e2e:api
 
     - name: Stop Docker image
       run: docker-compose down --remove-orphans
