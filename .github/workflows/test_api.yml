@@ -29,17 +29,20 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    # - name: Run npm install
-    #   run: npm run install:api
+    - name: Run npm install
+      run: npm run install:api
 
-    # - name: Build Docker image
-    #   run: docker-compose -f docker-compose.test-api.yaml build
+    - name: Build and run Docker image
+      run: docker-compose -f docker-compose.test-api.yaml up  -d --build
 
-    # - name: Run unit tests
-    #   run: docker-compose run api npm test
+    - name: Run unit tests
+      run: docker-compose exec api npm test
 
-    # - name: Run E2E tests
-    #   run: docker-compose run api npm run test:e2e
+    - name: Run E2E tests
+      run: docker-compose exec api npm run test:e2e
+
+    - name: Stop Docker image
+      run: docker-compose down --remove-orphans
 
     - name: End
       run:  echo Test completed
