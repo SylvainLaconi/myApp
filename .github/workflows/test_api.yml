@@ -9,55 +9,60 @@ on:
 jobs:
   API-test:
     runs-on: ubuntu-latest
+    container: node:16-alpine3.15
     env:
-      NODE_ENV: test
+      NODE_ENV: development
       API_PORT: 8000
-      FRONT_PORT: 3000
+      # FRONT_PORT: 3000
       PORT: 8080
       API_HOST: '0.0.0.0'
-      API_URL: http://0.0.0.0:8000
+      API_URL: http://localhost:8000
       POSTGRES_PORT: 5432
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
-      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: myapp
-      POSTGRES_DB: my-app-db
+      POSTGRES_URL: postgresql://myapp:password@172.17.0.1:5432/my-app-db
+
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: myapp
+          POSTGRES_DB: my-app-db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
 
-    - name: Check env variables
-      run: |
-        echo Display the NODE_ENV: $NODE_ENV
-        echo Display the API_PORT: $API_PORT
-        echo Display the PORT: $PORT
-        echo Display the API_HOST: $API_HOST
-        echo Display the API_URL: $API_URL
-        echo Display the POSTGRES_PORT: $POSTGRES_PORT
-        echo Display the POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Run npm install
       run: npm run install:api
 
-    - name: Build and run Docker image
-      run: docker-compose -f docker-compose.test-api.yaml up -d --build
+    - name: Run Myapp-api
+      run: npm run start:dev:api
 
-    - name: Sleep for 10 seconds
-      uses: jakejarvis/wait-action@master
-      with:
-        time: '10s'
+    # - name: Build and run Docker image
+    #   run: docker-compose -f docker-compose.test-api.yaml up -d --build
+
+    # - name: Sleep for 10 seconds
+    #   uses: jakejarvis/wait-action@master
+    #   with:
+    #     time: '10s'
 
     - name: Run unit tests
-      run: docker-compose exec myapp-api npm test
+      run: npm run test:unit:api
 
     - name: Run E2E tests
-      run: docker-compose exec api npm run test:e2e
+      run: npm run test:e2e:api
 
-    - name: Stop Docker image
-      run: docker-compose down --remove-orphans
+    # - name: Stop Docker image
+    #   run: docker-compose down --remove-orphans
 
     - name: End
       run:  echo Test completed
