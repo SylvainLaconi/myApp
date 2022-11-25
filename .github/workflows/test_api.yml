@@ -53,7 +53,7 @@ jobs:
       run: npm run install:api
 
     - name: Run api
-      run: npm run start:api
+      run: npm run start:api & #run app in background
 
     # - name: Build and run Docker image
     #   run: docker-compose -f docker-compose.test-api.yaml up -d --build
