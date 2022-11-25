@@ -9,8 +9,7 @@ on:
 jobs:
   API-test:
     runs-on: ubuntu-latest
-    container: 
-      image: node:16-alpine3.15
+    container: node:16-alpine3.15
     env:
       NODE_ENV: development
       API_PORT: 8000
@@ -41,6 +40,11 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
 
     - name: Install Nest
       run: npm install -g @nestjs/cli 
