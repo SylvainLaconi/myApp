@@ -15,9 +15,9 @@ services:
       NODE_ENV: ${NODE_ENV}
       PORT: ${API_PORT}
     depends_on:
-      - postgres
+      - database
 
-  postgres:
+  database:
     image: postgres:14-alpine
     container_name: myapp-postgres
     ports:

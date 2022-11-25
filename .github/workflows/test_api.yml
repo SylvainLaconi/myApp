@@ -11,35 +11,53 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: development
-      API_PORT: 8000
-      FRONT_PORT: 3000
       PORT: 8080
       API_HOST: '0.0.0.0'
-      API_URL: http://localhost:8000
+      API_URL: http://0.0.0.0:8080
       POSTGRES_PORT: 5432
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
-      POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: myapp
-      POSTGRES_DB: my-app-db
+      POSTGRES_URL: postgresql://myapp:password@localhost:5432/my-app-db
+
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_PASSWORD: password
+          POSTGRES_USER: myapp
+          POSTGRES_DB: my-app-db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
-    # - name: Run npm install
-    #   run: npm run install:api
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
 
-    # - name: Build Docker image
-    #   run: docker-compose -f docker-compose.test-api.yaml build
+    - name: Install Nest
+      run: npm install -g @nestjs/cli 
 
-    # - name: Run unit tests
-    #   run: docker-compose run api npm test
+    - name: Run npm install
+      run: npm run install:api
 
-    # - name: Run E2E tests
-    #   run: docker-compose run api npm run test:e2e
+    - name: Run api
+      run: npm run start:api & #run app in background
+
+    - name: Run unit tests
+      run: npm run test:unit:api
+
+    - name: Run E2E tests
+      run: npm run test:e2e:api
 
     - name: End
       run:  echo Test completed
