@@ -17,7 +17,7 @@
     "test:api": "cd apps/api && npm test && npm run test:e2e",
     "test:unit:api": "cd apps/api && npm test",
     "test:e2e:api": "cd apps/api && npm run test:e2e",
-    "start:dev:api": "cd apps/api && npm run start:dev"
+    "start:api": "cd apps/api && npm start"
   },
   "repository": {
     "type": "git",
