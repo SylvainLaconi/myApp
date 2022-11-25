@@ -19,7 +19,7 @@ jobs:
       POSTGRES_PORT: 5432
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
-      POSTGRES_URL: postgresql://myapp:password@172.17.0.1:5432/my-app-db
+      POSTGRES_URL: postgresql://myapp:password@0.0.0.0:5432/my-app-db
 
     services:
       postgres:
