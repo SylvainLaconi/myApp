@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NODE_ENV: development
-      API_PORT: 8000
-      # FRONT_PORT: 3000
       PORT: 8080
       API_HOST: '0.0.0.0'
       API_URL: http://0.0.0.0:8080
@@ -55,22 +53,11 @@ jobs:
     - name: Run api
       run: npm run start:api & #run app in background
 
-    # - name: Build and run Docker image
-    #   run: docker-compose -f docker-compose.test-api.yaml up -d --build
-
-    # - name: Sleep for 10 seconds
-    #   uses: jakejarvis/wait-action@master
-    #   with:
-    #     time: '10s'
-
     - name: Run unit tests
       run: npm run test:unit:api
 
     - name: Run E2E tests
       run: npm run test:e2e:api
-
-    # - name: Stop Docker image
-    #   run: docker-compose down --remove-orphans
 
     - name: End
       run:  echo Test completed
