@@ -41,8 +41,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install Nest
+      run: sudo npm install -g @nestjs/cli 
+
     - name: Run npm install
-      run: npm run install:api
+      run: sudo npm run install:api
 
     - name: Run Myapp-api
       run: npm run start:dev:api
